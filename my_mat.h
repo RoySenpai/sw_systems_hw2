@@ -2,12 +2,7 @@
 #define _MY_MAT_H
 
 #define MATRIX_SIZE 10
-
-/*
- * Get the matrix values from the use.
- * Uses byref pointer.
-*/
-void getMatrixValues(int**);
+#define INFINITY 2147483647
 
 /*
  * Find if there is a path from i to j.

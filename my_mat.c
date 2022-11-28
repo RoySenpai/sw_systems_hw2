@@ -1,36 +1,61 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "my_mat.h"
 
-void getMatrixValues(int** m) {
-    int i, j, ret = 0;
-    printf("Please enter the matrix values:\n");
+int getMinDistance(int distanceFromVert[], bool scannedVert[]) {
+    int min = INFINITY, index;
 
-    for (i = 0; i < MATRIX_SIZE; ++i)
+    for (int vert = 0; vert < MATRIX_SIZE; ++vert)
     {
-        for (j = 0; j < MATRIX_SIZE; ++j)
-        {
-            ret = scanf("%d", &m[i][j]);
+        if (scannedVert[vert] || distanceFromVert[vert] > min)
+            continue;
 
-            if (ret == EOF)
-                break;
+        min = distanceFromVert[vert];
+        index = vert;
+    }
+
+    return index;
+}
+
+int dijkstra_algorithm(int** m, int start, int vert_to_find) {
+    int distanceFromVert[MATRIX_SIZE], counter = 0;
+    bool scannedVert[MATRIX_SIZE] = { false };
+
+    for (int i = 0; i < MATRIX_SIZE; i++)
+        distanceFromVert[i] = INFINITY;
+
+    distanceFromVert[start] = 0;
+
+    while (++counter < MATRIX_SIZE)
+    {
+        int u = getMinDistance(distanceFromVert, scannedVert);
+
+        scannedVert[u] = true;
+
+        for (int v = 0; v < MATRIX_SIZE; v++)
+        {
+            if (scannedVert[v] || !m[u][v] || distanceFromVert[u] == INFINITY || (distanceFromVert[u] + m[u][v] >= distanceFromVert[v]))
+                continue;
+
+            distanceFromVert[v] = distanceFromVert[u] + m[u][v];
         }
     }
 
-    if (ret != 0)
-    {
-        while (i < MATRIX_SIZE)
-        {
-            while(j < MATRIX_SIZE)
-                m[i++][j++] = 0;
-        }
-    }   
+    return distanceFromVert[vert_to_find];
 }
 
 int isTherePath(int** m, int i, int j) {
-    // TODO
+    if (m[i][j])
+        return true;
+
+    int res = dijkstra_algorithm(m, i, j);
+
+    return (res < INFINITY && res != 0);
 }
 
 int findShortestPath(int** m, int i, int j) {
-    // TODO
+    int res = dijkstra_algorithm(m, i, j);
+
+    return ((res && res != INFINITY) ? res:-1);
 }

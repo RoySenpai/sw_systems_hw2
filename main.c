@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include "my_mat.h"
 
@@ -18,23 +19,40 @@ int main() {
         {
             case 'A':
             {
-                getMatrixValues(Matrix);
+                for (int i = 0; i < MATRIX_SIZE; ++i)
+                {
+                    for (int j = 0; j < MATRIX_SIZE; ++j)
+                        scanf("%d", &Matrix[i][j]);
+                }
+
                 break;
             }
 
             case 'B':
             {
                 int i, j;
+                bool ans;
+
                 scanf("%d%d", &i, &j);
-                isTherePath(Matrix, i, j);
+                ans = isTherePath(Matrix, i, j);
+
+                if (ans)
+                    printf("True\n");
+
+                else
+                    printf("False\n");
+
                 break;
             }
 
             case 'C':
             {
-                int i, j;
+                int i, j, ans;
+
                 scanf("%d%d", &i, &j);
-                findShortestPath(Matrix, i, j);
+                ans = findShortestPath(Matrix, i, j);
+                printf("%d\n", ans);
+
                 break;
             }
 
