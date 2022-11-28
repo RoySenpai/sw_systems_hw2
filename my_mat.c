@@ -1,25 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
 #include "my_mat.h"
 
-int getMinDistance(int distanceFromVert[], bool scannedVert[]) {
-    int min = INFINITY, index;
-
-    for (int vert = 0; vert < MATRIX_SIZE; ++vert)
-    {
-        if (scannedVert[vert] || distanceFromVert[vert] > min)
-            continue;
-
-        min = distanceFromVert[vert];
-        index = vert;
-    }
-
-    return index;
-}
-
 int dijkstra_algorithm(int** m, int start, int vert_to_find) {
-    int distanceFromVert[MATRIX_SIZE], counter = 0;
+    int distanceFromVert[MATRIX_SIZE], counter = 0, min, u;
     bool scannedVert[MATRIX_SIZE] = { false };
 
     for (int i = 0; i < MATRIX_SIZE; i++)
@@ -29,7 +13,16 @@ int dijkstra_algorithm(int** m, int start, int vert_to_find) {
 
     while (++counter < MATRIX_SIZE)
     {
-        int u = getMinDistance(distanceFromVert, scannedVert);
+        min = INFINITY;
+
+        for (int vert = 0; vert < MATRIX_SIZE; ++vert)
+        {
+            if (scannedVert[vert] || distanceFromVert[vert] > min)
+                continue;
+
+            min = distanceFromVert[vert];
+            u = vert;
+        }
 
         scannedVert[u] = true;
 

@@ -1,17 +1,17 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include "my_mat.h"
 
 int main() {
-    char choice = 0;
-
+    // Allocate memory
     int **Matrix = (int**) malloc(MATRIX_SIZE * sizeof(int*));
 
-    for (int i =0; i < MATRIX_SIZE; ++i)
+    for (int i = 0; i < MATRIX_SIZE; ++i)
         Matrix[i] = (int*) malloc(MATRIX_SIZE * sizeof(int));
 
-    while(choice != 'D')
+    char choice;
+
+    do 
     {
         scanf("%c", &choice);
 
@@ -31,28 +31,16 @@ int main() {
             case 'B':
             {
                 int i, j;
-                bool ans;
-
                 scanf("%d%d", &i, &j);
-                ans = isTherePath(Matrix, i, j);
-
-                if (ans)
-                    printf("True\n");
-
-                else
-                    printf("False\n");
-
+                printf("%s\n", isTherePath(Matrix, i, j) ? "True":"False");
                 break;
             }
 
             case 'C':
             {
-                int i, j, ans;
-
+                int i, j;
                 scanf("%d%d", &i, &j);
-                ans = findShortestPath(Matrix, i, j);
-                printf("%d\n", ans);
-
+                printf("%d\n", findShortestPath(Matrix, i, j));
                 break;
             }
 
@@ -61,6 +49,9 @@ int main() {
         }
     }
 
+    while(choice != 'D');
+
+    // Free memory to end program
     for (int i = 0; i < MATRIX_SIZE; ++i)
         free(Matrix[i]);
 
