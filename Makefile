@@ -1,19 +1,24 @@
 # Flags and commands
 CC = gcc
+AR = ar
 CFLAGS = -Wall -g
+AFLAGS = rcs
 
 .PHONY: all clean
 
 all: connections
 
-connections: main.o my_mat.o
+connections: main.o libmymath.a
 	$(CC) $(CFLAGS) $^ -o $@
 
+libmymath.a: my_mat.o
+	$(AR) $(AFLAGS) $@ $<
+
 main.o: main.c my_mat.h
-	$(CC) $(CFLAGS) -c $^
+	$(CC) $(CFLAGS) -c $<
 
 my_mat.o: my_mat.c my_mat.h
-	$(CC) $(CFLAGS) -c $^
+	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm -f *.o *.gch connections
+	rm -f *.o *.a connections

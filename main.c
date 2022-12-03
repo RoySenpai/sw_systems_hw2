@@ -32,7 +32,7 @@ int main() {
             {
                 int i, j;
                 scanf("%d%d", &i, &j);
-                printf("%s\n", isTherePath(Matrix, i, j) ? "True":"False");
+                printf("%s\n", isTherePath(Matrix, i, j, MATRIX_SIZE) ? "True":"False");
                 break;
             }
 
@@ -40,7 +40,7 @@ int main() {
             {
                 int i, j;
                 scanf("%d%d", &i, &j);
-                printf("%d\n", findShortestPath(Matrix, i, j));
+                printf("%d\n", findShortestPath(Matrix, i, j, MATRIX_SIZE));
                 break;
             }
 

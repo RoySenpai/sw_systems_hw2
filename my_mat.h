@@ -8,12 +8,12 @@
  * Find if there is a path from i to j.
  * Uses byref pointer.
 */
-int isTherePath(int**, int, int);
+int isTherePath(int**, int, int, int);
 
 /*
  * Returns the shortest path from i to j.
  * Uses byref pointer.
 */
-int findShortestPath(int**, int, int);
+int findShortestPath(int**, int, int, int);
 
 #endif
