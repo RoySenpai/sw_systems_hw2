@@ -2,6 +2,14 @@
 #include <stdbool.h>
 #include "my_mat.h"
 
+void getMatrixValues(int** m, int len) {
+    for (int i = 0; i < len; ++i)
+    {
+        for (int j = 0; j < len; ++j)
+            scanf("%d", &m[i][j]);
+    }
+}
+
 int dijkstra_algorithm(int** m, int start, int vert_to_find, const int len) {
     int distanceFromVert[len], counter = 0, min, u;
     bool scannedVert[len];

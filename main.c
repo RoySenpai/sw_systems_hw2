@@ -3,13 +3,14 @@
 #include "my_mat.h"
 
 int main() {
+    int i, j;
+    char choice;
+
     // Allocate memory
     int **Matrix = (int**) malloc(MATRIX_SIZE * sizeof(int*));
 
     for (int i = 0; i < MATRIX_SIZE; ++i)
         Matrix[i] = (int*) malloc(MATRIX_SIZE * sizeof(int));
-
-    char choice;
 
     do 
     {
@@ -19,18 +20,12 @@ int main() {
         {
             case 'A':
             {
-                for (int i = 0; i < MATRIX_SIZE; ++i)
-                {
-                    for (int j = 0; j < MATRIX_SIZE; ++j)
-                        scanf("%d", &Matrix[i][j]);
-                }
-
+                getMatrixValues(Matrix, MATRIX_SIZE);
                 break;
             }
 
             case 'B':
             {
-                int i, j;
                 scanf("%d%d", &i, &j);
                 printf("%s\n", isTherePath(Matrix, i, j, MATRIX_SIZE) ? "True":"False");
                 break;
@@ -38,7 +33,6 @@ int main() {
 
             case 'C':
             {
-                int i, j;
                 scanf("%d%d", &i, &j);
                 printf("%d\n", findShortestPath(Matrix, i, j, MATRIX_SIZE));
                 break;

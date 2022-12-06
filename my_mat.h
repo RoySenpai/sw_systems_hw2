@@ -5,6 +5,11 @@
 #define INFINITY 2147483647
 
 /*
+ * Get the matrix values from the user.
+*/
+void getMatrixValues(int**, int);
+
+/*
  * Find if there is a path from i to j.
  * Uses byref pointer.
 */
